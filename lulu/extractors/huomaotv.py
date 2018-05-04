@@ -9,6 +9,7 @@ from lulu.common import (
 )
 from lulu.util.parser import get_parser
 import time
+import os
 
 
 __all__ = ['huomaotv_download']
@@ -34,6 +35,8 @@ def huomaotv_download(
         download_url_ffmpeg(
             m3u8_url, title, 'mp4', None, output_dir=output_dir, merge=merge
         )
+        time.sleep(5)
+        os.system('rclone move /root/b/d/"{}.mp4" milo:milo/b'.format(title))
 
 
 download = huomaotv_download
