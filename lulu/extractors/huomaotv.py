@@ -8,6 +8,7 @@ from lulu.common import (
     playlist_not_supported,
 )
 from lulu.util.parser import get_parser
+import time
 
 
 __all__ = ['huomaotv_download']
@@ -24,7 +25,8 @@ def huomaotv_download(
     )
     parser = get_parser(html)
     m3u8_url = parser.source['src']
-    title = parser.title.text
+    sTime = time.strftime('%y%m%d_%H%M%S')
+    title = sTime+'-'+parser.title.text
 
     print_info(site_info, title, 'm3u8', float('inf'))
 
