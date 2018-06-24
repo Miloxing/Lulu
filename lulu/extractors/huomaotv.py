@@ -36,7 +36,7 @@ def huomaotv_download(
             m3u8_url, title, 'mp4', None, output_dir=output_dir, merge=merge
         )
         time.sleep(5)
-        os.system('rclone move /root/b/d/"{}.mp4" milo:milo/b'.format(title))
+        os.system('rclone move /root/b/d/"{}.mp4" milo:milo/b/火猫'.format(title))
 
 
 download = huomaotv_download
