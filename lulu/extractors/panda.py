@@ -58,6 +58,7 @@ def panda_download(url, info_only=False, **kwargs):
         'rid={}'.format(plflag[1], room_key, sign, ts, rid)
     )
     print_info(site_info, title, 'flv', float('inf'))
+    print(data)
     if not info_only:
         download_urls([real_url], title, 'flv', None, **kwargs)
         time.sleep(5)
