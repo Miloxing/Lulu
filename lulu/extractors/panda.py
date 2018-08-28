@@ -13,6 +13,8 @@ from lulu.common import (
 )
 
 
+import os
+
 __all__ = ['panda_download']
 site_info = '熊猫直播 panda.tv'
 
@@ -35,7 +37,10 @@ def panda_download(url, info_only=False, **kwargs):
     if errno:
         raise ValueError('Errno : {}, Errmsg : {}'.format(errno, errmsg))
     data = api_json['data']
-    title = data['roominfo']['name']
+    
+    sTime = time.strftime('%y%m%d_%H%M%S')
+    
+    title = sTime+'-'+data['roominfo']['name']
     room_key = data['videoinfo']['room_key']
     plflag = data['videoinfo']['plflag'].split('_')
     status = data['videoinfo']['status']
@@ -55,6 +60,8 @@ def panda_download(url, info_only=False, **kwargs):
     print_info(site_info, title, 'flv', float('inf'))
     if not info_only:
         download_urls([real_url], title, 'flv', None, **kwargs)
+        time.sleep(5)
+        os.system('rclone move /root/b/d/"{}.mp4" milo:milo/b/"{}"'.format(title,data['name']))
 
 
 download = panda_download
