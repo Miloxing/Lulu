@@ -284,10 +284,7 @@ def post_content(url, headers=FAKE_HEADERS, post_data={}):
 
 def url_size(url, headers=FAKE_HEADERS):
     response = urlopen_with_retry(url, headers=headers)
-    try:
-        size = response.headers['content-length']
-    except KeyError as e:
-        size = None
+    size = response.headers.get('content-length',None)
     return int(size) if size is not None else float('inf')
 
 
